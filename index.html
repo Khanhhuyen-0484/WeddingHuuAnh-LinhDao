@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đào Linh & Hữu Anh | Wedding Invitation</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- File CSS riêng -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CANVAS HIỆU ỨNG TẠO ĐỐM SÁNG XANH VÀNG PASTELL -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- AUDIO FILE SẴN CÓ -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="TRAI TÀI GÁI SẮC - Nhạc không lời đám cưới nhẹ nhàng.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="toast" id="toast">Đã sao chép số tài khoản!</div>
+
+  <!-- THIỆP MỞ ĐẦU (COVER CARD) - FULL BLEED ELEGANT -->
+  <div class="cover" id="cover">
+    <div class="cover-card">
+      <div class="cover-content">
+        <p class="eyebrow">WEDDING INVITATION</p>
+        <h1>Đào Linh <span>&</span> Hữu Anh</h1>
+        <div class="gold-line"></div>
+        <p class="cover-date">THE BEGINNING OF FOREVER</p>
+        <button class="open-btn" id="openBtn">✦ &nbsp; MỞ THIỆP MỜI &nbsp; ✦</button>
+        <p class="cover-hint">Một lời mời nhỏ · Một ngày thật đặc biệt</p>
+      </div>
+    </div>
+  </div>
+  <!-- NÚT BẬT TẮT NHẠC -->
+  <button class="music-btn" id="musicBtn" aria-label="Bật hoặc tắt nhạc" title="Bật / tắt nhạc">♫</button>
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <p class="eyebrow">Together with our families</p>
+      <h1>Đào Linh <span class="amp">&</span> Hữu Anh</h1>
+      <div class="gold-line"></div>
+      <p class="hero-date" id="heroDate">SAVE THE DATE</p>
+      <p class="hero-caption">Trân trọng mời bạn đến chung vui ngày hạnh phúc</p>
+    </div>
+    <div class="scroll-hint">KÉO XUỐNG ĐỂ KHÁM PHÁ ↓</div>
+  </header>
+
+  <!-- LỜI MỜI -->
+  <section class="intro">
+    <div class="section-inner reveal">
+      <p class="section-label">Our special day</p>
+      <h2 class="section-title">Một hành trình,<br>hai trái tim</h2>
+      <div class="ornament">✧ ❦ ✧</div>
+      <p class="intro-text">
+        Có những cuộc gặp gỡ trở thành định mệnh,
+        có những khoảnh khắc mở ra một hành trình mới.
+        Đào Linh và Hữu Anh rất vui khi được chia sẻ ngày
+        đặc biệt này cùng những người thân yêu.
+        Sự hiện diện của bạn sẽ khiến niềm hạnh phúc thêm trọn vẹn.
+      </p>
+    </div>
+  </section>
+
+  <!-- CÔ DÂU CHÚ RỂ -->
+  <section class="couple">
+    <div class="section-inner">
+      <p class="section-label reveal">The bride & the groom</p>
+      <h2 class="section-title reveal">Nhân vật chính</h2>
+      <div class="couple-grid">
+        <div class="person reveal">
+          <div class="initial">L</div>
+          <h3>Đào Linh</h3>
+          <p>CÔ DÂU</p>
+        </div>
+        <div class="person reveal">
+          <div class="initial">A</div>
+          <h3>Hữu Anh</h3>
+          <p>CHÚ RỂ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LỊCH TRÌNH NGÀY CƯỚI -->
+  <section class="program-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Wedding Schedule</p>
+      <h2 class="section-title reveal">Lịch trình lễ cưới</h2>
+      <div class="timeline-flow">
+        <div class="flow-item reveal">
+          <div class="flow-time">10:30</div>
+          <div class="flow-title">ĐÓN KHÁCH</div>
+          <div class="flow-desc">Chụp ảnh kỷ niệm tại sảnh</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">11:00</div>
+          <div class="flow-title">LỄ THÀNH HÔN</div>
+          <div class="flow-desc">Nghi lễ trao nhẫn & chúc phúc</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">11:30</div>
+          <div class="flow-title">KHAI TIỆC</div>
+          <div class="flow-desc">Thưởng thức tiệc mừng cưới</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">12:30</div>
+          <div class="flow-title">GIAO LƯU</div>
+          <div class="flow-desc">Âm nhạc & Trò chơi kỉ niệm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBUM ẢNH CƯỚI -->
+  <section class="gallery-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Our memories</p>
+      <h2 class="section-title reveal">Khoảnh khắc hạnh phúc</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Ảnh cưới 1">
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Ảnh cưới 2">
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Ảnh cưới 3">
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80" alt="Ảnh cưới 4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img src="" id="lightboxImg" alt="Enlarged photo">
+  </div>
+
+  <!-- THỜI GIAN VÀ ĐỊA ĐIỂM -->
+  <section class="timeline">
+    <div class="section-inner">
+      <p class="section-label reveal">Wedding celebration</p>
+      <h2 class="section-title reveal">Ngày vui của chúng mình</h2>
+      <p class="intro-text reveal" style="text-align:center;margin-top:18px">
+        Mong được gặp bạn trong khoảnh khắc đáng nhớ này.
+      </p>
+
+      <div class="wedding-details">
+        <div class="family-grid reveal">
+          <article class="family-info">
+            <h3>NHÀ GÁI</h3>
+            <p>ÔNG ĐÀO TRỌNG PHÚ</p>
+            <p>BÀ LÊ THỊ ĐÔNG</p>
+          </article>
+          <article class="family-info">
+            <h3>NHÀ TRAI</h3>
+            <p>ÔNG [TÊN BỐ CHÚ RỂ]</p>
+            <p>BÀ [TÊN MẸ CHÚ RỂ]</p>
+          </article>
+        </div>
+
+        <article class="wedding-invitation reveal">
+          <h3>DỰ BUỔI TIỆC CHUNG VUI</h3>
+          <p class="invitation-kicker">VÀO HỒI</p>
+          <p class="invitation-time">[GIỜ] · [THỨ]</p>
+          <p class="invitation-date">[NGÀY] · [THÁNG] · [NĂM]</p>
+          <p class="invitation-lunar">Tức ngày [âm lịch]</p>
+          <p class="invitation-venue-label">TRUNG TÂM HỘI NGHỊ TIỆC CƯỚI</p>
+          <p class="invitation-venue">[TÊN NHÀ HÀNG / SẢNH TIỆC]</p>
+          <p class="invitation-address">[Địa chỉ đầy đủ]</p>
+          <a class="map-link" href="https://maps.google.com/" target="_blank" rel="noopener">XEM CHỈ ĐƯỜNG</a>
+          <hr>
+          <h4>THAM DỰ LỄ VU QUY</h4>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHẦN MỪNG CƯỚI / MÃ QR -->
+  <section class="gift-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Wedding Box</p>
+      <h2 class="section-title reveal">Gửi lời chúc & Mừng cưới</h2>
+      <p class="intro-text reveal" style="text-align:center;margin-top:14px;color:var(--sage-soft)">
+        Sự hiện diện của bạn là món quà trân quý nhất. 
+        Nếu không thể tham dự, bạn có thể gửi yêu thương qua đây nhé!
+      </p>
+
+      <div class="gift-grid">
+        <div class="gift-card reveal">
+          <h3>Mừng Cưới Cô Dâu</h3>
+          <div class="qr-box">
+            <img src="https://img.vietqr.io/image/MB-0345678999-compact2.png?accountName=DAO%20THI%20LINH" alt="QR Cô dâu">
+          </div>
+          <div class="bank-info">
+            Ngân hàng: <strong>MBBank</strong><br>
+            STK: <strong id="stkBride">0345678999</strong><br>
+            Chủ TK: <strong>ĐÀO THỊ LINH</strong>
+          </div>
+          <button class="copy-btn" onclick="copySTK('stkBride')">📋 SAO CHÉP STK</button>
+        </div>
+
+        <div class="gift-card reveal">
+          <h3>Mừng Cưới Chú Rể</h3>
+          <div class="qr-box">
+            <img src="https://img.vietqr.io/image/VCB-0123456789-compact2.png?accountName=NGUYEN%20HUU%20ANH" alt="QR Chú rể">
+          </div>
+          <div class="bank-info">
+            Ngân hàng: <strong>Vietcombank</strong><br>
+            STK: <strong id="stkGroom">0123456789</strong><br>
+            Chủ TK: <strong>NGUYỄN HỮU ANH</strong>
+          </div>
+          <button class="copy-btn" onclick="copySTK('stkGroom')">📋 SAO CHÉP STK</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GỬI LỜI CHÚC -->
+  <section class="wishes-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Send Wishes</p>
+      <h2 class="section-title reveal">Gửi lời chúc mừng</h2>
+      <form class="wish-form reveal" id="wishForm">
+        <input type="text" class="wish-input" id="guestName" placeholder="Tên của bạn..." required>
+        <textarea class="wish-textarea" id="guestWish" rows="3" placeholder="Lời chúc gửi tới Đào Linh & Hữu Anh..." required></textarea>
+        <button type="submit" class="wish-btn">Gửi Lời Chúc 💌</button>
+      </form>
+
+      <div class="wishes-list" id="wishesList">
+        <div class="wish-item">
+          <h4>Minh Trí & Ánh Nguyệt</h4>
+          <p>Chúc hai bạn trăm năm hạnh phúc, mãi mãi yêu thương và bên nhau bền lâu nhé!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ĐẾM NGƯỢC -->
+  <section class="countdown">
+    <div class="section-inner reveal">
+      <p class="section-label">The countdown</p>
+      <h2 class="section-title">Đếm ngược đến ngày hạnh phúc</h2>
+      <div class="countdown-grid">
+        <div class="count-unit"><strong id="days">--</strong><span>Ngày</span></div>
+        <div class="count-unit"><strong id="hours">--</strong><span>Giờ</span></div>
+        <div class="count-unit"><strong id="minutes">--</strong><span>Phút</span></div>
+        <div class="count-unit"><strong id="seconds">--</strong><span>Giây</span></div>
+      </div>
+      <p id="countdownMessage" style="font-size:11px;margin-top:28px;color:var(--sage-soft)">
+        Hẹn gặp bạn trong ngày vui của chúng mình.
+      </p>
+    </div>
+  </section>
+
+  <!-- LỜI KẾT -->
+  <section class="final-note">
+    <div class="section-inner reveal">
+      <p class="eyebrow">With love,</p>
+      <div class="script">Đào Linh & Hữu Anh</div>
+      <div class="gold-line"></div>
+      <p>Cảm ơn bạn đã là một phần trong câu chuyện của chúng mình.</p>
+      <p>Hẹn gặp bạn trong ngày hạnh phúc nhé!</p>
+    </div>
+  </section>
+
+  <footer>
+    MADE WITH LOVE · ĐÀO LINH & HỮU ANH
+  </footer>
+
+  <!-- File JavaScript riêng -->
+  <script src="script.js"></script>
+</body>
+</html>
