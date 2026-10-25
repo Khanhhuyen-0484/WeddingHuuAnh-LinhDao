@@ -1,5 +1,5 @@
 /* 1. CHỈNH NGÀY CƯỚI */
-const weddingDate = "2026-12-20T10:00:00";
+const weddingDate = "2026-11-29T11:00:00";
 const dateObject = new Date(weddingDate);
 
 if (!Number.isNaN(dateObject.getTime())) {
@@ -101,7 +101,7 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
 
-document.querySelectorAll(".gallery-item img").forEach(img => {
+document.querySelectorAll(".gallery-item img, .person-img").forEach(img => {
   img.addEventListener("click", () => {
     lightboxImg.src = img.src;
     lightbox.classList.add("active");
