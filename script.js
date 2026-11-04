@@ -23,7 +23,7 @@ function updateCountdown() {
       document.getElementById(id).textContent = "00";
     });
     document.getElementById("countdownMessage").textContent =
-      "Ngày hạnh phúc đã đến. Chúc mừng Đào Linh & Hữu Anh!";
+      "Ngày hạnh phúc đã đến. Chúc mừng Hữu Anh & Đào Linh!";
     return;
   }
 
@@ -109,13 +109,36 @@ function copySTK(elementId) {
 }
 
 /* 5. LƯU & HIỂN THỊ LỜI CHÚC (GOOGLE SHEETS + LOCALSTORAGE) */
-// Dán link Web App Google Apps Script của bạn vào giữa 2 dấu nháy dưới đây:
 const GOOGLE_SHEETS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyFwuwAQdkV5hbSk9PqSKdh9i1Uyw8uzoMN8p5-0szECz3ktFqm8PlNJFUa2LALDO4qhA/exec";
 const LOCAL_WISHES_KEY = "wedding_wishes_daolinh_huuanh";
+const INITIAL_VISIBLE_WISHES = 4; // Chỉ hiện 4 lời chúc mới nhất cho gọn trang
 
 const wishForm = document.getElementById("wishForm");
 const wishesList = document.getElementById("wishesList");
 const wishSubmitBtn = wishForm ? wishForm.querySelector(".wish-btn") : null;
+
+let allWishesData = [
+  {
+    name: "Minh Trí & Ánh Nguyệt",
+    wish: "Chúc hai bạn trăm năm hạnh phúc, mãi mãi yêu thương và bên nhau bền lâu nhé!",
+    time: ""
+  }
+];
+let showingAllWishes = false;
+
+// Tạo nút Xem thêm / Thu gọn bên dưới danh sách lời chúc
+const toggleWishesBtn = document.createElement("button");
+toggleWishesBtn.type = "button";
+toggleWishesBtn.className = "wishes-more-btn";
+toggleWishesBtn.style.display = "none";
+if (wishesList && wishesList.parentNode) {
+  wishesList.parentNode.appendChild(toggleWishesBtn);
+}
+
+toggleWishesBtn.addEventListener("click", () => {
+  showingAllWishes = !showingAllWishes;
+  renderWishesList();
+});
 
 function createWishElement({ name, wish, time }) {
   const item = document.createElement("div");
@@ -143,6 +166,31 @@ function createWishElement({ name, wish, time }) {
   return item;
 }
 
+function renderWishesList() {
+  if (!wishesList) return;
+  wishesList.innerHTML = "";
+
+  const visibleItems = showingAllWishes
+    ? allWishesData
+    : allWishesData.slice(0, INITIAL_VISIBLE_WISHES);
+
+  visibleItems.forEach(entry => {
+    wishesList.appendChild(createWishElement(entry));
+  });
+
+  if (allWishesData.length > INITIAL_VISIBLE_WISHES) {
+    toggleWishesBtn.style.display = "inline-block";
+    const hiddenCount = allWishesData.length - INITIAL_VISIBLE_WISHES;
+    toggleWishesBtn.textContent = showingAllWishes
+      ? "Thu gọn lời chúc ↑"
+      : "Xem thêm " + hiddenCount + " lời chúc ↓";
+    wishesList.classList.toggle("expanded", showingAllWishes);
+  } else {
+    toggleWishesBtn.style.display = "none";
+    wishesList.classList.remove("expanded");
+  }
+}
+
 function showToastMessage(msg) {
   const toast = document.getElementById("toast");
   if (!toast) return;
@@ -164,17 +212,16 @@ function getLocalWishes() {
 function saveLocalWish(entry) {
   const current = getLocalWishes();
   current.unshift(entry);
-  localStorage.setItem(LOCAL_WISHES_KEY, JSON.stringify(current.slice(0, 100)));
+  localStorage.setItem(LOCAL_WISHES_KEY, JSON.stringify(current.slice(0, 50)));
 }
 
 async function loadWishes() {
-  // 1. Hiển thị lời chúc đã lưu trong localStorage trước để không có độ trễ
   const localWishes = getLocalWishes();
-  localWishes.slice().reverse().forEach(entry => {
-    wishesList.prepend(createWishElement(entry));
-  });
+  if (localWishes.length > 0) {
+    allWishesData = [...localWishes, ...allWishesData];
+  }
+  renderWishesList();
 
-  // 2. Nếu đã cấu hình Google Sheets URL thì tải toàn bộ lời chúc từ Google Sheets
   if (!GOOGLE_SHEETS_WEBAPP_URL) return;
 
   try {
@@ -182,10 +229,8 @@ async function loadWishes() {
     if (!res.ok) return;
     const data = await res.json();
     if (Array.isArray(data) && data.length > 0) {
-      wishesList.innerHTML = "";
-      data.forEach(entry => {
-        wishesList.appendChild(createWishElement(entry));
-      });
+      allWishesData = data;
+      renderWishesList();
     }
   } catch (err) {
     console.log("Không thể tải lời chúc từ Google Sheets:", err);
@@ -213,14 +258,13 @@ wishForm.addEventListener("submit", async (e) => {
     })
   };
 
-  // Hiển thị ngay lập tức lên đầu danh sách và lưu vào localStorage
-  wishesList.prepend(createWishElement(entry));
+  allWishesData.unshift(entry);
+  renderWishesList();
   saveLocalWish(entry);
   nameInput.value = "";
   wishInput.value = "";
   showToastMessage("💌 Đã gửi lời chúc thành công!");
 
-  // Đồng bộ lên Google Sheets nếu đã điền URL
   if (GOOGLE_SHEETS_WEBAPP_URL) {
     if (wishSubmitBtn) {
       wishSubmitBtn.disabled = true;
@@ -244,21 +288,100 @@ wishForm.addEventListener("submit", async (e) => {
   }
 });
 
-/* 6. MODAL XEM ẢNH */
+/* 6. THƯỚC PHIM KỶ NIỆM (AUTO-SCROLL + VUỐT TAY MƯỢT MÀ + VUỐT TRONG LIGHTBOX) */
+const filmTrack = document.getElementById("filmstripTrack");
+
+let isFilmPaused = false;
+let resumeTimer = null;
+
+function pauseFilmTemporarily(delay = 3000) {
+  isFilmPaused = true;
+  if (resumeTimer) clearTimeout(resumeTimer);
+  resumeTimer = setTimeout(() => {
+    isFilmPaused = false;
+  }, delay);
+}
+
+if (filmTrack) {
+  // Nhân đôi danh sách thẻ để cuộn vô tận mượt mà như cuộn phim
+  const originalCards = Array.from(filmTrack.children);
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    filmTrack.appendChild(clone);
+  });
+
+  let scrollPos = 0;
+  const speed = 0.55;
+
+  function stepFilm() {
+    if (!isFilmPaused && filmTrack.scrollWidth > filmTrack.clientWidth) {
+      scrollPos = filmTrack.scrollLeft + speed;
+      const halfWidth = filmTrack.scrollWidth / 2;
+      if (scrollPos >= halfWidth) {
+        scrollPos -= halfWidth;
+      }
+      filmTrack.scrollLeft = scrollPos;
+    }
+    requestAnimationFrame(stepFilm);
+  }
+  requestAnimationFrame(stepFilm);
+
+  filmTrack.addEventListener("touchstart", () => { isFilmPaused = true; }, { passive: true });
+  filmTrack.addEventListener("touchend", () => pauseFilmTemporarily(3000), { passive: true });
+  filmTrack.addEventListener("mouseenter", () => { isFilmPaused = true; });
+  filmTrack.addEventListener("mouseleave", () => { isFilmPaused = false; });
+}
+
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
 
-document.querySelectorAll(".gallery-item img, .person-img").forEach(img => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.src;
-    lightbox.classList.add("active");
-  });
+const albumSources = Array.from(document.querySelectorAll("#filmstripTrack .film-card:not([aria-hidden='true']) img")).map(img => img.src);
+let currentLightboxIdx = 0;
+
+function openLightboxWithSrc(src) {
+  const idx = albumSources.indexOf(src);
+  currentLightboxIdx = idx !== -1 ? idx : 0;
+  lightboxImg.src = src;
+  lightbox.classList.add("active");
+  isFilmPaused = true;
+}
+
+document.querySelectorAll(".film-card img, .person-img").forEach(img => {
+  img.addEventListener("click", () => openLightboxWithSrc(img.src));
 });
 
-lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
+// Vuốt trái/phải trực tiếp trên màn hình trong Lightbox để chuyển ảnh
+let touchStartX = 0;
+lightbox.addEventListener("touchstart", (e) => {
+  if (e.touches && e.touches.length > 0) {
+    touchStartX = e.touches[0].clientX;
+  }
+}, { passive: true });
+
+lightbox.addEventListener("touchend", (e) => {
+  if (!e.changedTouches || e.changedTouches.length === 0 || albumSources.length === 0) return;
+  const diffX = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(diffX) > 45) {
+    if (diffX < 0) {
+      currentLightboxIdx = (currentLightboxIdx + 1) % albumSources.length;
+    } else {
+      currentLightboxIdx = (currentLightboxIdx - 1 + albumSources.length) % albumSources.length;
+    }
+    lightboxImg.src = albumSources[currentLightboxIdx];
+  }
+}, { passive: true });
+
+lightboxClose.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+  pauseFilmTemporarily(1500);
+});
 lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.classList.remove("active");
+  if (e.target === lightbox) {
+    lightbox.classList.remove("active");
+    pauseFilmTemporarily(1500);
+  }
 });
 
 /* 7. CANVAS ĐỐM SÁNG XANH VÀNG PASTELL */
