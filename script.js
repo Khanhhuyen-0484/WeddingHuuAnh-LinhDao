@@ -288,56 +288,78 @@ wishForm.addEventListener("submit", async (e) => {
   }
 });
 
-/* 6. THƯỚC PHIM KỶ NIỆM (AUTO-SCROLL + VUỐT TAY MƯỢT MÀ + VUỐT TRONG LIGHTBOX) */
+/* 6. THƯỚC PHIM KỶ NIỆM (TỰ CHẠY MƯỢT TRÊN ĐIỆN THOẠI & KHÔNG TRÙNG ẢNH) */
 const filmTrack = document.getElementById("filmstripTrack");
 
 let isFilmPaused = false;
 let resumeTimer = null;
+let exactScrollPos = 0;
+let filmDirection = 1; // 1: trượt sang phải, -1: trượt ngược lại khi tới cuối
 
-function pauseFilmTemporarily(delay = 3000) {
+function pauseFilmTemporarily(delay = 2800) {
   isFilmPaused = true;
   if (resumeTimer) clearTimeout(resumeTimer);
   resumeTimer = setTimeout(() => {
+    if (filmTrack) exactScrollPos = filmTrack.scrollLeft;
     isFilmPaused = false;
   }, delay);
 }
 
 if (filmTrack) {
-  // Nhân đôi danh sách thẻ để cuộn vô tận mượt mà như cuộn phim
-  const originalCards = Array.from(filmTrack.children);
-  originalCards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    filmTrack.appendChild(clone);
-  });
+  let lastFrameTime = performance.now();
+  const speedPxPerSec = 42; // Tốc độ trượt mượt trên cả màn hình 60Hz và 120Hz
 
-  let scrollPos = 0;
-  const speed = 0.55;
+  function stepFilm(now) {
+    const dt = Math.min((now - lastFrameTime) / 1000, 0.05);
+    lastFrameTime = now;
 
-  function stepFilm() {
-    if (!isFilmPaused && filmTrack.scrollWidth > filmTrack.clientWidth) {
-      scrollPos = filmTrack.scrollLeft + speed;
-      const halfWidth = filmTrack.scrollWidth / 2;
-      if (scrollPos >= halfWidth) {
-        scrollPos -= halfWidth;
+    const maxScroll = filmTrack.scrollWidth - filmTrack.clientWidth;
+    if (!isFilmPaused && maxScroll > 4) {
+      // Giữ biến số thực để trình duyệt điện thoại không làm tròn về 0
+      exactScrollPos += speedPxPerSec * dt * filmDirection;
+
+      if (exactScrollPos >= maxScroll) {
+        exactScrollPos = maxScroll;
+        filmDirection = -1;
+      } else if (exactScrollPos <= 0) {
+        exactScrollPos = 0;
+        filmDirection = 1;
       }
-      filmTrack.scrollLeft = scrollPos;
+
+      filmTrack.scrollLeft = Math.round(exactScrollPos);
     }
     requestAnimationFrame(stepFilm);
   }
   requestAnimationFrame(stepFilm);
 
-  filmTrack.addEventListener("touchstart", () => { isFilmPaused = true; }, { passive: true });
-  filmTrack.addEventListener("touchend", () => pauseFilmTemporarily(3000), { passive: true });
-  filmTrack.addEventListener("mouseenter", () => { isFilmPaused = true; });
-  filmTrack.addEventListener("mouseleave", () => { isFilmPaused = false; });
+  filmTrack.addEventListener("touchstart", () => {
+    isFilmPaused = true;
+    if (resumeTimer) clearTimeout(resumeTimer);
+  }, { passive: true });
+
+  filmTrack.addEventListener("touchend", () => {
+    pauseFilmTemporarily(2800);
+  }, { passive: true });
+
+  filmTrack.addEventListener("touchcancel", () => {
+    pauseFilmTemporarily(2800);
+  }, { passive: true });
+
+  filmTrack.addEventListener("mouseenter", () => {
+    isFilmPaused = true;
+  });
+
+  filmTrack.addEventListener("mouseleave", () => {
+    exactScrollPos = filmTrack.scrollLeft;
+    isFilmPaused = false;
+  });
 }
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
 
-const albumSources = Array.from(document.querySelectorAll("#filmstripTrack .film-card:not([aria-hidden='true']) img")).map(img => img.src);
+const albumSources = Array.from(document.querySelectorAll("#filmstripTrack .film-card img")).map(img => img.src);
 let currentLightboxIdx = 0;
 
 function openLightboxWithSrc(src) {

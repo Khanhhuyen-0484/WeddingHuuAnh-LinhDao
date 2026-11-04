@@ -180,7 +180,7 @@ button { font: inherit; }
       rgba(18, 32, 24, 0.78) 78%,
       var(--sage-dark) 100%
     ),
-    url('img/hero.jpg') center 28%/cover no-repeat;
+    url('img/album-4.jpg') center 28%/cover no-repeat;
 }
 
 .hero::before {
