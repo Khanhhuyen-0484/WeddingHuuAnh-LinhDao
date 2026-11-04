@@ -215,15 +215,16 @@ function saveLocalWish(entry) {
   localStorage.setItem(LOCAL_WISHES_KEY, JSON.stringify(current.slice(0, 50)));
 }
 
-async function loadWishes() {
+function initLocalWishes() {
   const localWishes = getLocalWishes();
   if (localWishes.length > 0) {
     allWishesData = [...localWishes, ...allWishesData];
   }
   renderWishesList();
+}
 
+async function fetchRemoteWishes() {
   if (!GOOGLE_SHEETS_WEBAPP_URL) return;
-
   try {
     const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL);
     if (!res.ok) return;
@@ -237,7 +238,10 @@ async function loadWishes() {
   }
 }
 
-loadWishes();
+initLocalWishes();
+window.addEventListener("load", () => {
+  setTimeout(fetchRemoteWishes, 800);
+});
 
 wishForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -305,6 +309,19 @@ function pauseFilmTemporarily(delay = 2800) {
   }, delay);
 }
 
+let isGalleryInView = false;
+const gallerySection = document.querySelector(".gallery-section");
+if (gallerySection && "IntersectionObserver" in window) {
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isGalleryInView = entry.isIntersecting;
+    });
+  }, { rootMargin: "150px 0px" });
+  galleryObserver.observe(gallerySection);
+} else {
+  isGalleryInView = true;
+}
+
 if (filmTrack) {
   let lastFrameTime = performance.now();
   const speedPxPerSec = 42; // Tốc độ trượt mượt trên cả màn hình 60Hz và 120Hz
@@ -314,7 +331,7 @@ if (filmTrack) {
     lastFrameTime = now;
 
     const maxScroll = filmTrack.scrollWidth - filmTrack.clientWidth;
-    if (!isFilmPaused && maxScroll > 4) {
+    if (!isFilmPaused && isGalleryInView && maxScroll > 4) {
       // Giữ biến số thực để trình duyệt điện thoại không làm tròn về 0
       exactScrollPos += speedPxPerSec * dt * filmDirection;
 
@@ -420,7 +437,8 @@ resizeCanvas();
 
 const particles = [];
 
-for (let i = 0; i < 40; i++) {
+const particleCount = window.innerWidth < 650 ? 16 : 30;
+for (let i = 0; i < particleCount; i++) {
   particles.push({
     x: Math.random() * width,
     y: Math.random() * height,
