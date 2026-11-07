@@ -1,5 +1,5 @@
 /* 1. CHỈNH NGÀY CƯỚI */
-const weddingDate = "2026-11-29T11:00:00";
+const weddingDate = "2026-11-29T10:00:00";
 const dateObject = new Date(weddingDate);
 
 if (!Number.isNaN(dateObject.getTime())) {
