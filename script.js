@@ -109,7 +109,7 @@ function copySTK(elementId) {
 }
 
 /* 5. LƯU & HIỂN THỊ LỜI CHÚC (GOOGLE SHEETS + LOCALSTORAGE) */
-const GOOGLE_SHEETS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyFwuwAQdkV5hbSk9PqSKdh9i1Uyw8uzoMN8p5-0szECz3ktFqm8PlNJFUa2LALDO4qhA/exec";
+const GOOGLE_SHEETS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxYW2qIW75lbcZ4Ua8Rah8IYAk3n6v2LAZoT9QY0UWdslhp5CG-0-Y1gOx8RfOC4lNx2A/exec";
 const LOCAL_WISHES_KEY = "wedding_wishes_daolinh_huuanh";
 const INITIAL_VISIBLE_WISHES = 4; // Chỉ hiện 4 lời chúc mới nhất cho gọn trang
 
@@ -140,34 +140,16 @@ toggleWishesBtn.addEventListener("click", () => {
   renderWishesList();
 });
 
-function createWishElement({ name, wish, time, attendance, count }) {
+function createWishElement({ name, wish, time }) {
   const item = document.createElement("div");
   item.className = "wish-item";
 
   const header = document.createElement("div");
   header.className = "wish-header";
 
-  const titleWrap = document.createElement("div");
   const title = document.createElement("h4");
   title.textContent = name;
-  titleWrap.appendChild(title);
-
-  if (attendance) {
-    const badge = document.createElement("span");
-    badge.className = "wish-badge";
-    if (attendance === "Sẽ tham dự") {
-      badge.classList.add("attending");
-      badge.textContent = "✓ Sẽ tham dự" + (count ? (" · " + count) : "");
-    } else if (attendance === "Gửi lời chúc từ xa") {
-      badge.classList.add("not-attending");
-      badge.textContent = "♡ Gửi lời chúc từ xa";
-    } else {
-      badge.textContent = "? Chưa chắc chắn";
-    }
-    titleWrap.appendChild(badge);
-  }
-
-  header.appendChild(titleWrap);
+  header.appendChild(title);
 
   if (time) {
     const timeEl = document.createElement("span");
@@ -289,16 +271,30 @@ wishForm.addEventListener("submit", async (e) => {
   const attendance = attendanceSelect ? attendanceSelect.value : "Sẽ tham dự";
   const count = (attendance === "Gửi lời chúc từ xa") ? "" : (guestCountSelect ? guestCountSelect.value : "");
 
+  const currentTime = new Date().toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+
   const entry = {
     name,
     wish,
     attendance,
     count,
-    time: new Date().toLocaleDateString("vi-VN", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    })
+    time: currentTime
+  };
+
+  const sheetPayload = {
+    name,
+    wish,
+    attendance,
+    count,
+    guestName: name,
+    guestWish: wish,
+    guestAttendance: attendance,
+    guestCount: count,
+    time: currentTime
   };
 
   allWishesData.unshift(entry);
@@ -318,7 +314,7 @@ wishForm.addEventListener("submit", async (e) => {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(entry)
+        body: JSON.stringify(sheetPayload)
       });
     } catch (err) {
       console.log("Lỗi đồng bộ Google Sheets:", err);
