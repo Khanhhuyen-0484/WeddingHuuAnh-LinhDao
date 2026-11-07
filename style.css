@@ -1284,7 +1284,74 @@ section { padding: 95px 22px; position: relative; }
   transition: border-color .3s;
 }
 
-.wish-input:focus, .wish-textarea:focus { border-color: var(--sage-main); }
+.wish-input:focus, .wish-textarea:focus, .wish-select:focus { border-color: var(--sage-main); }
+
+.rsvp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  .rsvp-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.rsvp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rsvp-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--sage-dark);
+}
+
+.wish-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(45, 74, 59, 0.3);
+  border-radius: 4px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  outline: none;
+  cursor: pointer;
+  transition: border-color .3s;
+}
+
+.wish-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(45, 74, 59, 0.08);
+  color: var(--sage-main);
+  border: 1px solid rgba(45, 74, 59, 0.2);
+  margin-top: 4px;
+  margin-right: 6px;
+}
+
+.wish-badge.attending {
+  background: #edf7ef;
+  color: #1b5e20;
+  border-color: rgba(46, 125, 50, 0.3);
+}
+
+.wish-badge.not-attending {
+  background: #fdf2f2;
+  color: #b71c1c;
+  border-color: rgba(239, 83, 80, 0.3);
+}
 
 .wish-btn {
   background: var(--sage-main);

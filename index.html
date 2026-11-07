@@ -12,18 +12,18 @@
   <meta property="og:site_name" content="Thiệp Cưới Hữu Anh & Đào Linh">
   <meta property="og:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
   <meta property="og:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
-  <meta property="og:image" content="https://weddinghuuanhlinhdao.vercel.app/img/hero.jpg">
-  <meta property="og:image:secure_url" content="https://weddinghuuanhlinhdao.vercel.app/img/hero.jpg">
+  <meta property="og:image" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg">
+  <meta property="og:image:secure_url" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="800">
-  <meta property="og:image:height" content="1200">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Thiệp Cưới Hữu Anh & Đào Linh - 29.11.2026">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
   <meta name="twitter:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
-  <meta name="twitter:image" content="https://weddinghuuanhlinhdao.vercel.app/img/hero.jpg">
+  <meta name="twitter:image" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -380,8 +380,30 @@
       <h2 class="section-title reveal">Gửi lời chúc mừng</h2>
       <form class="wish-form reveal" id="wishForm">
         <input type="text" class="wish-input" id="guestName" placeholder="Tên của bạn / người thân..." required>
+        
+        <!-- XÁC NHẬN THAM DỰ & SỐ LƯỢNG NGƯỜI -->
+        <div class="rsvp-row">
+          <div class="rsvp-col">
+            <label class="rsvp-label" for="guestAttendance">Xác nhận tham dự:</label>
+            <select class="wish-select" id="guestAttendance">
+              <option value="Sẽ tham dự">✓ Chắc chắn tham dự</option>
+              <option value="Chưa chắc chắn">? Chưa chắc chắn</option>
+              <option value="Gửi lời chúc từ xa">♡ Gửi lời chúc từ xa</option>
+            </select>
+          </div>
+          <div class="rsvp-col" id="guestCountCol">
+            <label class="rsvp-label" for="guestCount">Số người đi cùng:</label>
+            <select class="wish-select" id="guestCount">
+              <option value="1 người">1 người (Đi một mình)</option>
+              <option value="2 người" selected>2 người</option>
+              <option value="3 người">3 người</option>
+              <option value="Cả gia đình (4+ người)">Cả gia đình (4+ người)</option>
+            </select>
+          </div>
+        </div>
+
         <textarea class="wish-textarea" id="guestWish" rows="3" placeholder="Lời chúc gửi tới Hữu Anh & Đào Linh..." required></textarea>
-        <button type="submit" class="wish-btn">Gửi Lời Chúc 💌</button>
+        <button type="submit" class="wish-btn">Gửi Lời Chúc &amp; Xác Nhận 💌</button>
       </form>
 
       <div class="wishes-list" id="wishesList">

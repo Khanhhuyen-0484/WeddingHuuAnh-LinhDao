@@ -140,16 +140,34 @@ toggleWishesBtn.addEventListener("click", () => {
   renderWishesList();
 });
 
-function createWishElement({ name, wish, time }) {
+function createWishElement({ name, wish, time, attendance, count }) {
   const item = document.createElement("div");
   item.className = "wish-item";
 
   const header = document.createElement("div");
   header.className = "wish-header";
 
+  const titleWrap = document.createElement("div");
   const title = document.createElement("h4");
   title.textContent = name;
-  header.appendChild(title);
+  titleWrap.appendChild(title);
+
+  if (attendance) {
+    const badge = document.createElement("span");
+    badge.className = "wish-badge";
+    if (attendance === "Sẽ tham dự") {
+      badge.classList.add("attending");
+      badge.textContent = "✓ Sẽ tham dự" + (count ? (" · " + count) : "");
+    } else if (attendance === "Gửi lời chúc từ xa") {
+      badge.classList.add("not-attending");
+      badge.textContent = "♡ Gửi lời chúc từ xa";
+    } else {
+      badge.textContent = "? Chưa chắc chắn";
+    }
+    titleWrap.appendChild(badge);
+  }
+
+  header.appendChild(titleWrap);
 
   if (time) {
     const timeEl = document.createElement("span");
@@ -243,6 +261,22 @@ window.addEventListener("load", () => {
   setTimeout(fetchRemoteWishes, 800);
 });
 
+const attendanceSelect = document.getElementById("guestAttendance");
+const guestCountSelect = document.getElementById("guestCount");
+const guestCountCol = document.getElementById("guestCountCol");
+
+if (attendanceSelect && guestCountCol) {
+  attendanceSelect.addEventListener("change", () => {
+    if (attendanceSelect.value === "Gửi lời chúc từ xa") {
+      guestCountCol.style.opacity = "0.35";
+      guestCountCol.style.pointerEvents = "none";
+    } else {
+      guestCountCol.style.opacity = "1";
+      guestCountCol.style.pointerEvents = "auto";
+    }
+  });
+}
+
 wishForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nameInput = document.getElementById("guestName");
@@ -252,9 +286,14 @@ wishForm.addEventListener("submit", async (e) => {
 
   if (!name || !wish) return;
 
+  const attendance = attendanceSelect ? attendanceSelect.value : "Sẽ tham dự";
+  const count = (attendance === "Gửi lời chúc từ xa") ? "" : (guestCountSelect ? guestCountSelect.value : "");
+
   const entry = {
     name,
     wish,
+    attendance,
+    count,
     time: new Date().toLocaleDateString("vi-VN", {
       day: "2-digit",
       month: "2-digit",
