@@ -1,456 +1,457 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026</title>
-  <meta name="description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình Hữu Anh & Đào Linh vào Chủ Nhật, 29.11.2026.">
-
-  <!-- Open Graph / Zalo / Messenger / Facebook Preview -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://weddinghuuanhlinhdao.vercel.app/?thiepcuoi">
-  <meta property="og:site_name" content="Thiệp Cưới Hữu Anh & Đào Linh">
-  <meta property="og:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
-  <meta property="og:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
-  <meta property="og:image" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg?v=thiepcuoi">
-  <meta property="og:image:secure_url" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg?v=thiepcuoi">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Thiệp Cưới Hữu Anh & Đào Linh - 29.11.2026">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
-  <meta name="twitter:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
-  <meta name="twitter:image" content="https://weddinghuuanhlinhdao.vercel.app/img/og-preview.jpg?v=thiepcuoi">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="img/album-4.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="img/LGH00491.JPG" fetchpriority="high">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- File CSS riêng -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- CANVAS HIỆU ỨNG TẠO ĐỐM SÁNG XANH VÀNG PASTELL -->
-  <canvas id="particle-canvas"></canvas>
-
-  <!-- AUDIO FILE SẴN CÓ -->
-  <audio id="bgAudio" loop preload="none">
-    <source src="TRAI TÀI GÁI SẮC - Nhạc không lời đám cưới nhẹ nhàng.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="toast" id="toast">Đã sao chép số tài khoản!</div>
-
-  <!-- THIỆP MỞ ĐẦU (COVER CARD) - FULL BLEED ELEGANT -->
-  <div class="cover" id="cover">
-    <div class="cover-card">
-      <div class="cover-content">
-        <p class="eyebrow">WEDDING INVITATION</p>
-        <h1>Hữu Anh <span>&</span> Đào Linh</h1>
-        <div class="gold-line"></div>
-        <p class="cover-date">THE BEGINNING OF FOREVER</p>
-        <button class="open-btn" id="openBtn">✦ &nbsp; MỞ THIỆP MỜI &nbsp; ✦</button>
-        <p class="cover-hint">Một lời mời nhỏ · Một ngày thật đặc biệt</p>
-      </div>
-    </div>
-  </div>
-  <!-- NÚT BẬT TẮT NHẠC -->
-  <button class="music-btn" id="musicBtn" aria-label="Bật hoặc tắt nhạc" title="Bật / tắt nhạc">♫</button>
-
-  <!-- HERO SECTION -->
-  <header class="hero" id="home">
-    <div class="hero-content">
-      <p class="eyebrow">Together with our families</p>
-      <h1>Hữu Anh <span class="amp">&</span> Đào Linh</h1>
-      <div class="gold-line"></div>
-      <p class="hero-date" id="heroDate">SAVE THE DATE</p>
-      <p class="hero-caption">Gửi tới những người thương quý của Hữu Anh &amp; Đào Linh</p>
-    </div>
-    <div class="scroll-hint">KÉO XUỐNG ĐỂ KHÁM PHÁ ↓</div>
-  </header>
-
-  <!-- LỜI MỜI -->
-  <section class="intro">
-    <div class="section-inner reveal">
-      <p class="section-label">Our special day</p>
-      <h2 class="section-title">Một hành trình,<br>hai trái tim</h2>
-      <div class="ornament">✧ ❦ ✧</div>
-      <p class="intro-text">
-        Có những cuộc gặp gỡ trở thành định mệnh,
-        có những khoảnh khắc mở ra một hành trình mới.
-        Hữu Anh và Đào Linh vô cùng hạnh phúc khi được sẻ chia
-        ngày trọng đại này cùng những người thương quý.
-        Sự hiện diện và lời chúc phúc của mọi người sẽ khiến niềm vui thêm trọn vẹn.
-      </p>
-    </div>
-  </section>
-
-  <!-- CÔ DÂU & CHÚ RỂ -->
-  <section class="couple">
-    <div class="section-inner">
-      <p class="section-label reveal">The bride &amp; the groom</p>
-      <h2 class="section-title reveal">Nhân vật chính</h2>
-      <div class="ornament reveal">✧ ❦ ✧</div>
-      <div class="couple-grid">
-        <article class="person-card reveal">
-          <img src="img/codau.jpg" width="800" height="1200" alt="Cô dâu Đào Linh" class="person-img" loading="lazy" decoding="async">
-          <div class="person-overlay">
-            <span class="person-role">THE BRIDE · CÔ DÂU</span>
-            <h3 class="person-name">Đào Linh</h3>
-            <div class="person-line"></div>
-            <p class="person-bio">Dịu dàng, ấm áp &amp; luôn rạng rỡ nụ cười hạnh phúc</p>
-          </div>
-        </article>
-
-        <article class="person-card reveal">
-          <img src="img/chure.jpg" width="800" height="1200" alt="Chú rể Hữu Anh" class="person-img" loading="lazy" decoding="async">
-          <div class="person-overlay">
-            <span class="person-role">THE GROOM · CHÚ RỂ</span>
-            <h3 class="person-name">Hữu Anh</h3>
-            <div class="person-line"></div>
-            <p class="person-bio">Chững chạc, chân thành &amp; là điểm tựa bình yên</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-<!-- THỜI GIAN VÀ ĐỊA ĐIỂM (THIỆP MỜI CHÍNH) -->
-  <section class="timeline">
-    <div class="section-inner">
-      <p class="section-label reveal">Wedding Celebration</p>
-      <h2 class="section-title reveal">Ngày vui của chúng mình</h2>
-      <div class="ornament reveal">✧ ❦ ✧</div>
-
-      <div class="invitation-suite reveal">
-        <!-- GIA ĐÌNH HAI BÊN (THIỆP NHÀ GÁI: NHÀ GÁI ĐẠI DIỆN GIA CHỦ) -->
-        <div class="family-grid">
-          <article class="family-info">
-            <span class="family-badge">NHÀ GÁI</span>
-            <p class="parent-name">ÔNG ĐÀO TRỌNG PHÚ</p>
-            <p class="parent-name">BÀ LÊ THỊ ĐÔNG</p>
-            <p class="family-loc">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
-          </article>
-          <div class="family-divider" aria-hidden="true"><span>囍</span></div>
-          <article class="family-info">
-            <span class="family-badge">NHÀ TRAI</span>
-            <p class="parent-name">ÔNG NGUYỄN HỮU NGÂN</p>
-            <p class="parent-name">BÀ LÊ THỊ HÀ</p>
-            <p class="family-loc">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
-          </article>
-        </div>
-
-        <!-- TRÂN TRỌNG KÍNH MỜI -->
-        <div class="cordial-invite">
-          <div class="cordial-line"></div>
-          <p class="cordial-subtitle">TRÂN TRỌNG BÁO TIN LỄ THÀNH HÔN<br>CỦA HAI CON CHÚNG TÔI</p>
-          <div class="cordial-couple">Hữu Anh <span>&amp;</span> Đào Linh</div>
-          <div class="cordial-box">
-            <h3 class="cordial-title">Trân Trọng Kính Mời</h3>
-            <p class="cordial-guest">Những người thương quý của Hữu Anh &amp; Đào Linh</p>
-            <p class="cordial-desc">
-              Đến dự bữa cơm thân mật chung vui cùng gia đình chúng tôi.
-              Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!
-            </p>
-          </div>
-        </div>
-
-        <!-- HAI BÊN GIA ĐÌNH: ƯU TIÊN BÊN NHÀ GÁI CHO KHÁCH NHÀ GÁI -->
-        <div class="events-grid">
-          <article class="event-card highlight-card">
-            <span class="event-tag">TIỆC MỪNG BÊN NHÀ GÁI</span>
-            <h3>TẠI TƯ GIA NHÀ GÁI</h3>
-            <p class="invitation-address">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
-            <div class="event-divider"></div>
-
-            <div class="event-milestone">
-              <p class="milestone-label">✦ BỮA CƠM THÂN MẬT ✦</p>
-              <p class="invitation-time">Vào lúc: 17:00 · THỨ BẢY</p>
-              <div class="invitation-date-box">
-                <span class="date-num">28</span>
-                <span class="date-sep">·</span>
-                <span class="date-num">11</span>
-                <span class="date-sep">·</span>
-                <span class="date-num">2026</span>
-              </div>
-              <p class="invitation-lunar">Tức ngày 20 tháng 10 năm Bính Ngọ</p>
-            </div>
-
-            <div class="event-ceremony-box">
-              <p class="ceremony-title">LỄ NẠP TÀI &amp; VU QUY</p>
-              <p class="ceremony-time">Nạp Tài: 08:00 · Thứ Sáu · <strong>27 . 11</strong></p>
-              <p class="ceremony-lunar">(Tức ngày 19 tháng 10 năm Bính Ngọ)</p>
-            </div>
-
-            <a class="map-link" href="https://maps.app.goo.gl/jmgZ7pTwqKpf7Bgh9" target="_blank" rel="noopener">📍 XEM CHỈ ĐƯỜNG NHÀ GÁI</a>
-          </article>
-
-          <article class="event-card">
-            <span class="event-tag">LỄ CƯỚI BÊN NHÀ TRAI</span>
-            <h3>TẠI TƯ GIA NHÀ TRAI</h3>
-            <p class="invitation-address">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
-            <div class="event-divider"></div>
-
-            <div class="event-milestone">
-              <p class="milestone-label">✦ LỄ THÀNH HÔN ✦</p>
-              <p class="invitation-time">Vào hồi: 10:00 · CHỦ NHẬT</p>
-              <div class="invitation-date-box">
-                <span class="date-num">29</span>
-                <span class="date-sep">·</span>
-                <span class="date-num">11</span>
-                <span class="date-sep">·</span>
-                <span class="date-num">2026</span>
-              </div>
-              <p class="invitation-lunar">Tức ngày 21 tháng 10 năm Bính Ngọ</p>
-            </div>
-
-            <div class="event-ceremony-box">
-              <p class="ceremony-title">DỰ TIỆC CHUNG VUI</p>
-              <p class="ceremony-time">Sau lễ thành hôn · <strong>29 . 11 . 2026</strong></p>
-              <p class="ceremony-lunar">(Tức ngày 21 tháng 10 năm Bính Ngọ)</p>
-            </div>
-
-            <a class="map-link" href="https://maps.app.goo.gl/hmMsLtLcKAbCsqCC9" target="_blank" rel="noopener">📍 XEM CHỈ ĐƯỜNG NHÀ TRAI</a>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LỊCH TRÌNH NGÀY CƯỚI -->
-  <section class="program-section">
-    <div class="section-inner">
-      <p class="section-label reveal">Wedding Schedule</p>
-      <h2 class="section-title reveal">Lịch trình lễ cưới</h2>
-      <div class="timeline-flow">
-        <div class="flow-item reveal">
-          <div class="flow-time">08:00 · 27/11</div>
-          <div class="flow-title">LỄ NẠP TÀI</div>
-          <div class="flow-desc">Thứ Sáu (19/10 ÂL) · Tại Tư gia Nhà Gái</div>
-        </div>
-        <div class="flow-item reveal">
-          <div class="flow-time">17:00 · 28/11</div>
-          <div class="flow-title">BỮA CƠM THÂN MẬT</div>
-          <div class="flow-desc">Thứ Bảy (20/10 ÂL) · Tại Tư gia Nhà Gái</div>
-        </div>
-        <div class="flow-item reveal">
-          <div class="flow-time">Sáng 29/11</div>
-          <div class="flow-title">LỄ VU QUY</div>
-          <div class="flow-desc">Chủ Nhật (21/10 ÂL) · Tiễn nàng về dinh</div>
-        </div>
-        <div class="flow-item reveal">
-          <div class="flow-time">10:00 · 29/11</div>
-          <div class="flow-title">LỄ THÀNH HÔN</div>
-          <div class="flow-desc">Chủ Nhật (21/10 ÂL) · Tại Tư gia Nhà Trai</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ALBUM ẢNH CƯỚI (THƯỚC PHIM KỶ NIỆM TRƯỢT NGANG) -->
-  <section class="gallery-section">
-    <div class="section-inner">
-      <p class="section-label reveal">Our memories</p>
-      <h2 class="section-title reveal">Khoảnh khắc hạnh phúc</h2>
-      <div class="ornament reveal">✧ ❦ ✧</div>
-      <p class="filmstrip-hint reveal">← Vuốt ngang hoặc chạm vào ảnh để xem rõ hơn →</p>
-    </div>
-
-    <div class="filmstrip-wrapper reveal">
-      <div class="filmstrip-track" id="filmstripTrack">
-        <div class="film-card">
-          <img src="img/album-1.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 1">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XiJie3J27ufSwOmKDVgswVHa9Uv3Pzma.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 2">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XN2LMoBV0P1XpyqUoWGJ1cjK9wWbhoTw.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 3">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XNB3PDDekV3xEoD3yaxK2Ya48bugw6K0.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 4">
-        </div>
-        <div class="film-card">
-          <img src="img/album-3.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 5">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XMRGYMNGLB317RtT1YdXl5AXYzedTvM0.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 6">
-        </div>
-        <div class="film-card">
-          <img src="img/album-2.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 7">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XNRxrL32gzmI45RtUL5X5a47kD1hzKqm.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 8">
-        </div>
-        <div class="film-card">
-          <img src="img/hero.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 9">
-        </div>
-        <div class="film-card">
-          <img src="img/2aOboRA2XjM6YMT77eyxBWeO1z86jrOYxfIx4ENc.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 10">
-        </div>
-        <div class="film-card">
-          <img src="img/album-5.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 11">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LIGHTBOX MODAL (CÓ NÚT CHUYỂN ẢNH TRÁI/PHẢI) -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">&times;</button>
-    <img src="" id="lightboxImg" alt="Enlarged photo">
-  </div>
-
-  <!-- PHẦN HỘP MỪNG CƯỚI (ẨN QR TRONG HỘP QUÀ TINH TẾ) -->
-  <section class="gift-section">
-    <div class="section-inner">
-      <div class="gift-box-card reveal" id="openGiftBtn" role="button" tabindex="0" aria-label="Mở hộp mừng cưới">
-        <div class="gift-icon-wrap">
-          <svg class="gift-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="28" width="44" height="28" rx="4" stroke="currentColor" stroke-width="2.2"/>
-            <rect x="6" y="20" width="52" height="8" rx="3" stroke="currentColor" stroke-width="2.2"/>
-            <path d="M32 20V56" stroke="currentColor" stroke-width="2.2"/>
-            <path d="M10 38H54" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <path d="M32 20C32 20 20 20 18 13C16 6 26 6 32 20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M32 20C32 20 44 20 46 13C48 6 38 6 32 20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <p class="section-label" style="margin-bottom:6px">Wedding Gift Box</p>
-        <h2 class="gift-box-title">Hộp Mừng Cưới</h2>
-        <p class="gift-box-desc">
-          Sự hiện diện và lời chúc phúc của mọi người là món quà trân quý nhất đối với Hữu Anh &amp; Đào Linh.
-          Nếu ở xa chưa thể sắp xếp tham dự, có thể gửi chút tâm tình qua hộp quà nhỏ này nhé!
-        </p>
-        <span class="gift-open-trigger">✦ CHẠM ĐỂ MỞ HỘP QUÀ ✦</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODAL HỘP MỪNG CƯỚI (CHỈ HIỆN KHI BẤM MỞ HỘP QUÀ) -->
-  <div class="gift-modal" id="giftModal" aria-hidden="true">
-    <div class="gift-modal-dialog">
-      <button class="gift-modal-close" id="closeGiftBtn" aria-label="Đóng hộp quà">&times;</button>
-      <p class="gift-modal-subtitle">WEDDING GIFT BOX</p>
-      <h3 class="gift-modal-title">Gửi Quà Mừng Cưới</h3>
-      <p class="gift-modal-note">Cảm ơn tình cảm yêu thương của mọi người dành cho hai vợ chồng ♥</p>
-
-      <div class="gift-tabs">
-        <button type="button" class="gift-tab active" data-target="brideGiftPane">Cô Dâu Đào Linh</button>
-        <button type="button" class="gift-tab" data-target="groomGiftPane">Chú Rể Hữu Anh</button>
-      </div>
-
-      <div class="gift-pane active" id="brideGiftPane">
-        <div class="qr-box">
-          <img src="img/qr-codau-square.jpg" alt="QR Cô dâu Đào Linh" loading="lazy" decoding="async">
-        </div>
-        <div class="bank-info">
-          Ngân hàng: <strong>VietinBank</strong><br>
-          Số TK: <strong id="stkBride">106886563158</strong><br>
-          Chủ TK: <strong>DAO THI LINH</strong><br>
-          <span style="font-size: 11px; color: rgba(237, 244, 239, 0.75);">CN Bắc Thanh Hóa - PGD Thiệu Hóa</span>
-        </div>
-        <button type="button" class="copy-btn" onclick="copySTK('stkBride')">📋 SAO CHÉP SỐ TÀI KHOẢN</button>
-      </div>
-
-      <div class="gift-pane" id="groomGiftPane">
-        <div class="qr-box">
-          <img src="img/qr-chure-square.jpg" alt="QR Chú rể Hữu Anh" loading="lazy" decoding="async">
-        </div>
-        <div class="bank-info">
-          Ngân hàng: <strong>VietinBank</strong><br>
-          Số TK: <strong id="stkGroom">108869278908</strong><br>
-          Chủ TK: <strong>NGUYEN HUU ANH</strong><br>
-          <span style="font-size: 11px; color: rgba(237, 244, 239, 0.75);">CN Sầm Sơn - PGD Lam Sơn</span>
-        </div>
-        <button type="button" class="copy-btn" onclick="copySTK('stkGroom')">📋 SAO CHÉP SỐ TÀI KHOẢN</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- GỬI LỜI CHÚC -->
-  <section class="wishes-section">
-    <div class="section-inner">
-      <p class="section-label reveal">Send Wishes</p>
-      <h2 class="section-title reveal">Gửi lời chúc mừng</h2>
-      <form class="wish-form reveal" id="wishForm">
-        <input type="text" class="wish-input" id="guestName" placeholder="Tên của bạn / người thân..." required>
-        
-        <!-- XÁC NHẬN THAM DỰ & SỐ LƯỢNG NGƯỜI -->
-        <div class="rsvp-row">
-          <div class="rsvp-col">
-            <label class="rsvp-label" for="guestAttendance">Xác nhận tham dự:</label>
-            <select class="wish-select" id="guestAttendance">
-              <option value="Sẽ tham dự">✓ Chắc chắn tham dự</option>
-              <option value="Chưa chắc chắn">? Chưa chắc chắn</option>
-              <option value="Gửi lời chúc từ xa">♡ Gửi lời chúc từ xa</option>
-            </select>
-          </div>
-          <div class="rsvp-col" id="guestCountCol">
-            <label class="rsvp-label" for="guestCount">Số người đi cùng:</label>
-            <select class="wish-select" id="guestCount">
-              <option value="1 người">1 người (Đi một mình)</option>
-              <option value="2 người" selected>2 người</option>
-              <option value="3 người">3 người</option>
-              <option value="Cả gia đình (4+ người)">Cả gia đình (4+ người)</option>
-            </select>
-          </div>
-        </div>
-
-        <textarea class="wish-textarea" id="guestWish" rows="3" placeholder="Lời chúc gửi tới Hữu Anh & Đào Linh..." required></textarea>
-        <button type="submit" class="wish-btn">Gửi Lời Chúc &amp; Xác Nhận 💌</button>
-      </form>
-
-      <div class="wishes-list" id="wishesList">
-        <div class="wish-item">
-          <h4>Minh Trí & Ánh Nguyệt</h4>
-          <p>Chúc hai bạn trăm năm hạnh phúc, mãi mãi yêu thương và bên nhau bền lâu nhé!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ĐẾM NGƯỢC -->
-  <section class="countdown">
-    <div class="section-inner reveal">
-      <p class="section-label">The countdown</p>
-      <h2 class="section-title">Đếm ngược đến ngày hạnh phúc</h2>
-      <div class="countdown-grid">
-        <div class="count-unit"><strong id="days">--</strong><span>Ngày</span></div>
-        <div class="count-unit"><strong id="hours">--</strong><span>Giờ</span></div>
-        <div class="count-unit"><strong id="minutes">--</strong><span>Phút</span></div>
-        <div class="count-unit"><strong id="seconds">--</strong><span>Giây</span></div>
-      </div>
-      <p id="countdownMessage" style="font-size:11px;margin-top:28px;color:var(--sage-soft)">
-        Rất hân hạnh được đón tiếp trong ngày trọng đại!
-      </p>
-    </div>
-  </section>
-
-  <!-- LỜI KẾT -->
-  <section class="final-note">
-    <div class="section-inner reveal">
-      <div class="final-card">
-        <div class="final-ornament">✧ ❦ ✧</div>
-        <p class="eyebrow">WITH LOVE</p>
-        <div class="script"><span class="name-keep">Hữu Anh</span> <span class="script-amp">&amp;</span> <span class="name-keep">Đào Linh</span></div>
-        <div class="gold-line"></div>
-        <p class="final-message">Cảm ơn những người thương quý đã luôn yêu thương và đồng hành cùng Hữu Anh &amp; Đào Linh.<br>Hẹn gặp nhau trong ngày hạnh phúc nhé!</p>
-        <p class="final-date">29 · 11 · 2026</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    MADE WITH LOVE · HỮU ANH & ĐÀO LINH
-  </footer>
-
-  <!-- File JavaScript riêng -->
-  <script src="script.js"></script>
-</body>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026</title>
+  <meta name="description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình Hữu Anh & Đào Linh vào Chủ Nhật, 29.11.2026.">
+
+  <!-- Open Graph / Zalo / Messenger / Facebook Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://weddinghuuanhlinhdao.vercel.app/">
+  <meta property="og:site_name" content="Thiệp Cưới Hữu Anh & Đào Linh">
+  <meta property="og:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
+  <meta property="og:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
+  <meta property="og:image" content="https://weddinghuuanhlinhdao.vercel.app/img/thiepcuoi.jpg">
+  <meta property="og:image:secure_url" content="https://weddinghuuanhlinhdao.vercel.app/img/thiepcuoi.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Thiệp Cưới Hữu Anh & Đào Linh - 29.11.2026">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thiệp Cưới Hữu Anh & Đào Linh | 29.11.2026">
+  <meta name="twitter:description" content="Trân trọng kính mời những người thương quý tới dự buổi tiệc chung vui cùng gia đình chúng mình!">
+  <meta name="twitter:image" content="https://weddinghuuanhlinhdao.vercel.app/img/thiepcuoi.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="img/album-4.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="img/LGH00491.JPG" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- File CSS riêng -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CANVAS HIỆU ỨNG TẠO ĐỐM SÁNG XANH VÀNG PASTELL -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- AUDIO FILE SẴN CÓ -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="wedding-music.mp3" type="audio/mpeg">
+    <source src="TRAI TÀI GÁI SẮC - Nhạc không lời đám cưới nhẹ nhàng.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="toast" id="toast">Đã sao chép số tài khoản!</div>
+
+  <!-- THIỆP MỞ ĐẦU (COVER CARD) - FULL BLEED ELEGANT -->
+  <div class="cover" id="cover">
+    <div class="cover-card">
+      <div class="cover-content">
+        <p class="eyebrow">WEDDING INVITATION</p>
+        <h1>Hữu Anh <span>&</span> Đào Linh</h1>
+        <div class="gold-line"></div>
+        <p class="cover-date">THE BEGINNING OF FOREVER</p>
+        <button class="open-btn" id="openBtn">✦ &nbsp; MỞ THIỆP MỜI &nbsp; ✦</button>
+        <p class="cover-hint">Một lời mời nhỏ · Một ngày thật đặc biệt</p>
+      </div>
+    </div>
+  </div>
+  <!-- NÚT BẬT TẮT NHẠC -->
+  <button class="music-btn" id="musicBtn" aria-label="Bật hoặc tắt nhạc" title="Bật / tắt nhạc">♫</button>
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <p class="eyebrow">Together with our families</p>
+      <h1>Hữu Anh <span class="amp">&</span> Đào Linh</h1>
+      <div class="gold-line"></div>
+      <p class="hero-date" id="heroDate">SAVE THE DATE</p>
+      <p class="hero-caption">Gửi tới những người thương quý của Hữu Anh &amp; Đào Linh</p>
+    </div>
+    <div class="scroll-hint">KÉO XUỐNG ĐỂ KHÁM PHÁ ↓</div>
+  </header>
+
+  <!-- LỜI MỜI -->
+  <section class="intro">
+    <div class="section-inner reveal">
+      <p class="section-label">Our special day</p>
+      <h2 class="section-title">Một hành trình,<br>hai trái tim</h2>
+      <div class="ornament">✧ ❦ ✧</div>
+      <p class="intro-text">
+        Có những cuộc gặp gỡ trở thành định mệnh,
+        có những khoảnh khắc mở ra một hành trình mới.
+        Hữu Anh và Đào Linh vô cùng hạnh phúc khi được sẻ chia
+        ngày trọng đại này cùng những người thương quý.
+        Sự hiện diện và lời chúc phúc của mọi người sẽ khiến niềm vui thêm trọn vẹn.
+      </p>
+    </div>
+  </section>
+
+  <!-- CÔ DÂU & CHÚ RỂ -->
+  <section class="couple">
+    <div class="section-inner">
+      <p class="section-label reveal">The bride &amp; the groom</p>
+      <h2 class="section-title reveal">Nhân vật chính</h2>
+      <div class="ornament reveal">✧ ❦ ✧</div>
+      <div class="couple-grid">
+        <article class="person-card reveal">
+          <img src="img/codau.jpg" width="800" height="1200" alt="Cô dâu Đào Linh" class="person-img" loading="lazy" decoding="async">
+          <div class="person-overlay">
+            <span class="person-role">THE BRIDE · CÔ DÂU</span>
+            <h3 class="person-name">Đào Linh</h3>
+            <div class="person-line"></div>
+            <p class="person-bio">Dịu dàng, ấm áp &amp; luôn rạng rỡ nụ cười hạnh phúc</p>
+          </div>
+        </article>
+
+        <article class="person-card reveal">
+          <img src="img/chure.jpg" width="800" height="1200" alt="Chú rể Hữu Anh" class="person-img" loading="lazy" decoding="async">
+          <div class="person-overlay">
+            <span class="person-role">THE GROOM · CHÚ RỂ</span>
+            <h3 class="person-name">Hữu Anh</h3>
+            <div class="person-line"></div>
+            <p class="person-bio">Chững chạc, chân thành &amp; là điểm tựa bình yên</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<!-- THỜI GIAN VÀ ĐỊA ĐIỂM (THIỆP MỜI CHÍNH) -->
+  <section class="timeline">
+    <div class="section-inner">
+      <p class="section-label reveal">Wedding Celebration</p>
+      <h2 class="section-title reveal">Ngày vui của chúng mình</h2>
+      <div class="ornament reveal">✧ ❦ ✧</div>
+
+      <div class="invitation-suite reveal">
+        <!-- GIA ĐÌNH HAI BÊN (THIỆP NHÀ GÁI: NHÀ GÁI ĐẠI DIỆN GIA CHỦ) -->
+        <div class="family-grid">
+          <article class="family-info">
+            <span class="family-badge">NHÀ GÁI</span>
+            <p class="parent-name">ÔNG ĐÀO TRỌNG PHÚ</p>
+            <p class="parent-name">BÀ LÊ THỊ ĐÔNG</p>
+            <p class="family-loc">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
+          </article>
+          <div class="family-divider" aria-hidden="true"><span>囍</span></div>
+          <article class="family-info">
+            <span class="family-badge">NHÀ TRAI</span>
+            <p class="parent-name">ÔNG NGUYỄN HỮU NGÂN</p>
+            <p class="parent-name">BÀ LÊ THỊ HÀ</p>
+            <p class="family-loc">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
+          </article>
+        </div>
+
+        <!-- TRÂN TRỌNG KÍNH MỜI -->
+        <div class="cordial-invite">
+          <div class="cordial-line"></div>
+          <p class="cordial-subtitle">TRÂN TRỌNG BÁO TIN LỄ THÀNH HÔN<br>CỦA HAI CON CHÚNG TÔI</p>
+          <div class="cordial-couple">Hữu Anh <span>&amp;</span> Đào Linh</div>
+          <div class="cordial-box">
+            <h3 class="cordial-title">Trân Trọng Kính Mời</h3>
+            <p class="cordial-guest">Những người thương quý của Hữu Anh &amp; Đào Linh</p>
+            <p class="cordial-desc">
+              Đến dự bữa cơm thân mật chung vui cùng gia đình chúng tôi.
+              Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!
+            </p>
+          </div>
+        </div>
+
+        <!-- HAI BÊN GIA ĐÌNH: ƯU TIÊN BÊN NHÀ GÁI CHO KHÁCH NHÀ GÁI -->
+        <div class="events-grid">
+          <article class="event-card highlight-card">
+            <span class="event-tag">TIỆC MỪNG BÊN NHÀ GÁI</span>
+            <h3>TẠI TƯ GIA NHÀ GÁI</h3>
+            <p class="invitation-address">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
+            <div class="event-divider"></div>
+
+            <div class="event-milestone">
+              <p class="milestone-label">✦ BỮA CƠM THÂN MẬT ✦</p>
+              <p class="invitation-time">Vào lúc: 17:00 · THỨ BẢY</p>
+              <div class="invitation-date-box">
+                <span class="date-num">28</span>
+                <span class="date-sep">·</span>
+                <span class="date-num">11</span>
+                <span class="date-sep">·</span>
+                <span class="date-num">2026</span>
+              </div>
+              <p class="invitation-lunar">Tức ngày 20 tháng 10 năm Bính Ngọ</p>
+            </div>
+
+            <div class="event-ceremony-box">
+              <p class="ceremony-title">LỄ NẠP TÀI &amp; VU QUY</p>
+              <p class="ceremony-time">Nạp Tài: 08:00 · Thứ Sáu · <strong>27 . 11</strong></p>
+              <p class="ceremony-lunar">(Tức ngày 19 tháng 10 năm Bính Ngọ)</p>
+            </div>
+
+            <a class="map-link" href="https://maps.app.goo.gl/jmgZ7pTwqKpf7Bgh9" target="_blank" rel="noopener">📍 XEM CHỈ ĐƯỜNG NHÀ GÁI</a>
+          </article>
+
+          <article class="event-card">
+            <span class="event-tag">LỄ CƯỚI BÊN NHÀ TRAI</span>
+            <h3>TẠI TƯ GIA NHÀ TRAI</h3>
+            <p class="invitation-address">Khu phố Cổ Đô, xã Thiệu Trung, tỉnh Thanh Hóa</p>
+            <div class="event-divider"></div>
+
+            <div class="event-milestone">
+              <p class="milestone-label">✦ LỄ THÀNH HÔN ✦</p>
+              <p class="invitation-time">Vào hồi: 10:00 · CHỦ NHẬT</p>
+              <div class="invitation-date-box">
+                <span class="date-num">29</span>
+                <span class="date-sep">·</span>
+                <span class="date-num">11</span>
+                <span class="date-sep">·</span>
+                <span class="date-num">2026</span>
+              </div>
+              <p class="invitation-lunar">Tức ngày 21 tháng 10 năm Bính Ngọ</p>
+            </div>
+
+            <div class="event-ceremony-box">
+              <p class="ceremony-title">DỰ TIỆC CHUNG VUI</p>
+              <p class="ceremony-time">Sau lễ thành hôn · <strong>29 . 11 . 2026</strong></p>
+              <p class="ceremony-lunar">(Tức ngày 21 tháng 10 năm Bính Ngọ)</p>
+            </div>
+
+            <a class="map-link" href="https://maps.app.goo.gl/hmMsLtLcKAbCsqCC9" target="_blank" rel="noopener">📍 XEM CHỈ ĐƯỜNG NHÀ TRAI</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LỊCH TRÌNH NGÀY CƯỚI -->
+  <section class="program-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Wedding Schedule</p>
+      <h2 class="section-title reveal">Lịch trình lễ cưới</h2>
+      <div class="timeline-flow">
+        <div class="flow-item reveal">
+          <div class="flow-time">08:00 · 27/11</div>
+          <div class="flow-title">LỄ NẠP TÀI</div>
+          <div class="flow-desc">Thứ Sáu (19/10 ÂL) · Tại Tư gia Nhà Gái</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">17:00 · 28/11</div>
+          <div class="flow-title">BỮA CƠM THÂN MẬT</div>
+          <div class="flow-desc">Thứ Bảy (20/10 ÂL) · Tại Tư gia Nhà Gái</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">Sáng 29/11</div>
+          <div class="flow-title">LỄ VU QUY</div>
+          <div class="flow-desc">Chủ Nhật (21/10 ÂL) · Tiễn nàng về dinh</div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-time">10:00 · 29/11</div>
+          <div class="flow-title">LỄ THÀNH HÔN</div>
+          <div class="flow-desc">Chủ Nhật (21/10 ÂL) · Tại Tư gia Nhà Trai</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBUM ẢNH CƯỚI (THƯỚC PHIM KỶ NIỆM TRƯỢT NGANG) -->
+  <section class="gallery-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Our memories</p>
+      <h2 class="section-title reveal">Khoảnh khắc hạnh phúc</h2>
+      <div class="ornament reveal">✧ ❦ ✧</div>
+      <p class="filmstrip-hint reveal">← Vuốt ngang hoặc chạm vào ảnh để xem rõ hơn →</p>
+    </div>
+
+    <div class="filmstrip-wrapper reveal">
+      <div class="filmstrip-track" id="filmstripTrack">
+        <div class="film-card">
+          <img src="img/album-1.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 1">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XiJie3J27ufSwOmKDVgswVHa9Uv3Pzma.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 2">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XN2LMoBV0P1XpyqUoWGJ1cjK9wWbhoTw.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 3">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XNB3PDDekV3xEoD3yaxK2Ya48bugw6K0.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 4">
+        </div>
+        <div class="film-card">
+          <img src="img/album-3.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 5">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XMRGYMNGLB317RtT1YdXl5AXYzedTvM0.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 6">
+        </div>
+        <div class="film-card">
+          <img src="img/album-2.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 7">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XNRxrL32gzmI45RtUL5X5a47kD1hzKqm.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 8">
+        </div>
+        <div class="film-card">
+          <img src="img/hero.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 9">
+        </div>
+        <div class="film-card">
+          <img src="img/2aOboRA2XjM6YMT77eyxBWeO1z86jrOYxfIx4ENc.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 10">
+        </div>
+        <div class="film-card">
+          <img src="img/album-5.jpg" width="720" height="1080" loading="lazy" decoding="async" alt="Ảnh cưới Hữu Anh &amp; Đào Linh 11">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL (CÓ NÚT CHUYỂN ẢNH TRÁI/PHẢI) -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">&times;</button>
+    <img src="" id="lightboxImg" alt="Enlarged photo">
+  </div>
+
+  <!-- PHẦN HỘP MỪNG CƯỚI (ẨN QR TRONG HỘP QUÀ TINH TẾ) -->
+  <section class="gift-section">
+    <div class="section-inner">
+      <div class="gift-box-card reveal" id="openGiftBtn" role="button" tabindex="0" aria-label="Mở hộp mừng cưới">
+        <div class="gift-icon-wrap">
+          <svg class="gift-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="28" width="44" height="28" rx="4" stroke="currentColor" stroke-width="2.2"/>
+            <rect x="6" y="20" width="52" height="8" rx="3" stroke="currentColor" stroke-width="2.2"/>
+            <path d="M32 20V56" stroke="currentColor" stroke-width="2.2"/>
+            <path d="M10 38H54" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <path d="M32 20C32 20 20 20 18 13C16 6 26 6 32 20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M32 20C32 20 44 20 46 13C48 6 38 6 32 20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="section-label" style="margin-bottom:6px">Wedding Gift Box</p>
+        <h2 class="gift-box-title">Hộp Mừng Cưới</h2>
+        <p class="gift-box-desc">
+          Sự hiện diện và lời chúc phúc của mọi người là món quà trân quý nhất đối với Hữu Anh &amp; Đào Linh.
+          Nếu ở xa chưa thể sắp xếp tham dự, có thể gửi chút tâm tình qua hộp quà nhỏ này nhé!
+        </p>
+        <span class="gift-open-trigger">✦ CHẠM ĐỂ MỞ HỘP QUÀ ✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL HỘP MỪNG CƯỚI (CHỈ HIỆN KHI BẤM MỞ HỘP QUÀ) -->
+  <div class="gift-modal" id="giftModal" aria-hidden="true">
+    <div class="gift-modal-dialog">
+      <button class="gift-modal-close" id="closeGiftBtn" aria-label="Đóng hộp quà">&times;</button>
+      <p class="gift-modal-subtitle">WEDDING GIFT BOX</p>
+      <h3 class="gift-modal-title">Gửi Quà Mừng Cưới</h3>
+      <p class="gift-modal-note">Cảm ơn tình cảm yêu thương của mọi người dành cho hai vợ chồng ♥</p>
+
+      <div class="gift-tabs">
+        <button type="button" class="gift-tab active" data-target="brideGiftPane">Cô Dâu Đào Linh</button>
+        <button type="button" class="gift-tab" data-target="groomGiftPane">Chú Rể Hữu Anh</button>
+      </div>
+
+      <div class="gift-pane active" id="brideGiftPane">
+        <div class="qr-box">
+          <img src="img/qr-codau-square.jpg" alt="QR Cô dâu Đào Linh" loading="lazy" decoding="async">
+        </div>
+        <div class="bank-info">
+          Ngân hàng: <strong>VietinBank</strong><br>
+          Số TK: <strong id="stkBride">106886563158</strong><br>
+          Chủ TK: <strong>DAO THI LINH</strong><br>
+          <span style="font-size: 11px; color: rgba(237, 244, 239, 0.75);">CN Bắc Thanh Hóa - PGD Thiệu Hóa</span>
+        </div>
+        <button type="button" class="copy-btn" onclick="copySTK('stkBride')">📋 SAO CHÉP SỐ TÀI KHOẢN</button>
+      </div>
+
+      <div class="gift-pane" id="groomGiftPane">
+        <div class="qr-box">
+          <img src="img/qr-chure-square.jpg" alt="QR Chú rể Hữu Anh" loading="lazy" decoding="async">
+        </div>
+        <div class="bank-info">
+          Ngân hàng: <strong>VietinBank</strong><br>
+          Số TK: <strong id="stkGroom">108869278908</strong><br>
+          Chủ TK: <strong>NGUYEN HUU ANH</strong><br>
+          <span style="font-size: 11px; color: rgba(237, 244, 239, 0.75);">CN Sầm Sơn - PGD Lam Sơn</span>
+        </div>
+        <button type="button" class="copy-btn" onclick="copySTK('stkGroom')">📋 SAO CHÉP SỐ TÀI KHOẢN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GỬI LỜI CHÚC -->
+  <section class="wishes-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Send Wishes</p>
+      <h2 class="section-title reveal">Gửi lời chúc mừng</h2>
+      <form class="wish-form reveal" id="wishForm">
+        <input type="text" class="wish-input" id="guestName" placeholder="Tên của bạn / người thân..." required>
+        
+        <!-- XÁC NHẬN THAM DỰ & SỐ LƯỢNG NGƯỜI -->
+        <div class="rsvp-row">
+          <div class="rsvp-col">
+            <label class="rsvp-label" for="guestAttendance">Xác nhận tham dự:</label>
+            <select class="wish-select" id="guestAttendance">
+              <option value="Sẽ tham dự">✓ Chắc chắn tham dự</option>
+              <option value="Chưa chắc chắn">? Chưa chắc chắn</option>
+              <option value="Gửi lời chúc từ xa">♡ Gửi lời chúc từ xa</option>
+            </select>
+          </div>
+          <div class="rsvp-col" id="guestCountCol">
+            <label class="rsvp-label" for="guestCount">Số người đi cùng:</label>
+            <select class="wish-select" id="guestCount">
+              <option value="1 người">1 người (Đi một mình)</option>
+              <option value="2 người" selected>2 người</option>
+              <option value="3 người">3 người</option>
+              <option value="Cả gia đình (4+ người)">Cả gia đình (4+ người)</option>
+            </select>
+          </div>
+        </div>
+
+        <textarea class="wish-textarea" id="guestWish" rows="3" placeholder="Lời chúc gửi tới Hữu Anh & Đào Linh..." required></textarea>
+        <button type="submit" class="wish-btn">Gửi Lời Chúc &amp; Xác Nhận 💌</button>
+      </form>
+
+      <div class="wishes-list" id="wishesList">
+        <div class="wish-item">
+          <h4>Minh Trí & Ánh Nguyệt</h4>
+          <p>Chúc hai bạn trăm năm hạnh phúc, mãi mãi yêu thương và bên nhau bền lâu nhé!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ĐẾM NGƯỢC -->
+  <section class="countdown">
+    <div class="section-inner reveal">
+      <p class="section-label">The countdown</p>
+      <h2 class="section-title">Đếm ngược đến ngày hạnh phúc</h2>
+      <div class="countdown-grid">
+        <div class="count-unit"><strong id="days">--</strong><span>Ngày</span></div>
+        <div class="count-unit"><strong id="hours">--</strong><span>Giờ</span></div>
+        <div class="count-unit"><strong id="minutes">--</strong><span>Phút</span></div>
+        <div class="count-unit"><strong id="seconds">--</strong><span>Giây</span></div>
+      </div>
+      <p id="countdownMessage" style="font-size:11px;margin-top:28px;color:var(--sage-soft)">
+        Rất hân hạnh được đón tiếp trong ngày trọng đại!
+      </p>
+    </div>
+  </section>
+
+  <!-- LỜI KẾT -->
+  <section class="final-note">
+    <div class="section-inner reveal">
+      <div class="final-card">
+        <div class="final-ornament">✧ ❦ ✧</div>
+        <p class="eyebrow">WITH LOVE</p>
+        <div class="script"><span class="name-keep">Hữu Anh</span> <span class="script-amp">&amp;</span> <span class="name-keep">Đào Linh</span></div>
+        <div class="gold-line"></div>
+        <p class="final-message">Cảm ơn những người thương quý đã luôn yêu thương và đồng hành cùng Hữu Anh &amp; Đào Linh.<br>Hẹn gặp nhau trong ngày hạnh phúc nhé!</p>
+        <p class="final-date">29 · 11 · 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    MADE WITH LOVE · HỮU ANH & ĐÀO LINH
+  </footer>
+
+  <!-- File JavaScript riêng -->
+  <script src="script.js"></script>
+</body>
 </html>
